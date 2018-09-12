@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Locadora de Veículos</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" >
+
+  </head>
+
+  <body>
+ 	<nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          	<a class="navbar-brand" href="{% url 'url_index' %}">Home</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'url_veiculo' %}">Veículos</a></li>
+        	  <li><a href="{% url 'url_locacao' %}">Locações</a></li>
+            <li><a href="{% url 'url_cliente' %}">Clientes</a></li>
+            <li><a href="{% url 'url_funcionario' %}">Funcionários</a></li>
+            <li><a href="{% url 'url_cargo' %}">Cargos</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav>
+
+<div class="jumbotron" style="background-image:url({% static 'images/img1.jpg' %}); color: #FFFFFF; background-size: 100% 100%;">
+  	<div class="container">
+		<h1>Locadora de Veículos</h1>
+		<h2>LOCAMAIS</h2>
+	</div>
+</div>
+    {% block content %}{% endblock %}
+</body>
+</html>
