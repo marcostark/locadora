@@ -4,40 +4,16 @@
 
 {% block content %}
 
-
 <div class="container">
-
-	<form method="post">
 		<fieldset>
-	  		<legend>Novo Cliente</legend>
-			{% csrf_token %}
-			<div class="form-group">
-				{{ form.as_p}}
-	    			<!--<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">-->
-	  		</div>
-
-	  		<!--<div class="form-group">-->
-	    			<!--<input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">-->
-	  		<!--</div>-->
-
-	  		 <!--<div class="form-group">-->
-          <!--<label>Status</label>-->
-          <!--<select name="status">-->
-            <!--<option value="Ativo">Ativo</option>-->
-            <!--<option value="Bloqueado">Bloqueado</option>-->
-          <!--</select>-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-            <!--<input type="number" min="0" step="any" class="form-control" id="pontosFidelidade" name="pontosFidelidade" placeholder="Pontos de Fidelidade">-->
-        <!--</div>-->
-
-	  		<button type="submit" class="btn btn-primary">
+			<a href="{% url 'url_cliente' %}">
+				<button type="submit" class="btn btn-primary" formaction="{% url 'url_cliente' %}">
 	  				<span class="glyphicon glyphicon-thumbs-up"></span>
 	  				Cadastrar
 			</button>
+			</a>
 		</fieldset>
-	</form>
+	<!--</form>-->
 </div> <!-- fim .container 1 -->
 
 <div class="container">
@@ -57,11 +33,11 @@
   						<th>Código</th>
   						<th>Nome</th>
   						<th>Cpf</th>
-              			<th>Status</th>
+              <th>Status</th>
   						<th>Pontos de Fidelidade</th>
-  						<th>Opções</th>
+  						<th></th>
   				</tr>
-    				{% for cliente in clientes %}
+				{% for cliente in clientes %}
     				<tr>
 						<td class="col-md-1">{{cliente.pk}}}</td>
 						<td class="col-md-2">{{ cliente.nome }}</td>
@@ -74,6 +50,7 @@
     					</td>
 					</tr>
 				{% endfor %}
+
     			</table>
 
  		</div><!-- fim .panel-body -->
