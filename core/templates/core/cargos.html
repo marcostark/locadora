@@ -5,22 +5,12 @@
 {% block content %}
 <div class="container">
 	
-	<form action="../controller/incluir_cargo.php" method="post">
+	<form action="{% url 'url_cargo' %}" method="post">
+		{% csrf_token %}
 		<fieldset>
 	  		<legend>Novo Cargo</legend>
-	
-	  		<div class="form-group">
-	    			<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
-	  		</div>
-	
-	  		<div class="form-group">
-	    			<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">  
-	  		</div>
-	  		
-	  		<div class="form-group">
-	    			<input type="number" min="0" step="any" class="form-control" id="salarioBase" name="salarioBase" placeholder="Salário Base">  
-	  		</div>
-	  
+			{{ form.as_p }}
+
 	  		<button type="submit" class="btn btn-primary">
 	  				<span class="glyphicon glyphicon-thumbs-up"></span>
 	  				Cadastrar
@@ -47,17 +37,19 @@
   						<th>Nome</th>
   						<th>Descrição</th>
   						<th>Salário Base</th>
-  						<th></th>
+  						<th>Opções</th>
   				</tr>
+					{% for cargo in cargos	%}
     				<tr>
-    					<td class="col-md-1"></td>
-    					<td class="col-md-1"></td>
-    					<td class="col-md-3"></td>
-    					<td class="col-md-1"></td>
+    					<td class="col-md-1">{{ cargo.id }}</td>
+    					<td class="col-md-1">{{ cargo.nome }}</td>
+    					<td class="col-md-3">{{ cargo.descricao }}</td>
+    					<td class="col-md-1">{{ cargo.salario }}</td>
     					<td class="col-md-1">
-    					<a class="btn btn-danger" role="button">Excluir</a>  								
+    					<a class="btn btn-danger" href="{% url 'url_removercargos' cargo.id %}" role="button">Excluir</a>
     					</td>
-    			</tr>
+    				</tr>
+					{% endfor %}
     			
     			</table>
     			

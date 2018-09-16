@@ -63,14 +63,14 @@
   				</tr>
     				{% for cliente in clientes %}
     				<tr>
-						<td class="col-md-1">{{cliente.pk}}}</td>
+						<td class="col-md-1">{{ cliente.id}}</td>
 						<td class="col-md-2">{{ cliente.nome }}</td>
     					<td class="col-md-2">{{ cliente.cpf }}</td>
     					<td class="col-md-1">{{ cliente.status }}</td>
 						<td class="col-md-1">{{ cliente.pontos_fidelidade }}</td>
 
     					<td class="col-md-1">
-    						<a class="btn btn-danger" href="" role="button">Excluir</a>
+    						<a class="btn btn-danger" href="{% url 'url_removerclientes' cliente.pk %}" role="button">Excluir</a>
     					</td>
 					</tr>
 				{% endfor %}

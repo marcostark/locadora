@@ -16,14 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import index, funcionarios, cargos, clientes, locacoes, veiculos
+from core.views import remover_clientes, remover_cargos, remover_funcionarios
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('funcionarios/', funcionarios, name='url_funcionario'),
     path('cargos/', cargos, name='url_cargo'),
     path('clientes/', clientes, name='url_cliente'),
     path('locacoes/', locacoes, name='url_locacao'),
     path('veiculos/', veiculos, name='url_veiculo'),
+
+    path('remover_clientes/<int:pk>/', remover_clientes, name='url_removerclientes'),
+    path('remover_cargos/<int:pk>/', remover_cargos, name='url_removercargos'),
+    path('remover_funcionario/<int:pk>/', remover_funcionarios, name='url_removerfuncionario'),
 
     path('', index, name='url_index'),
 ]

@@ -6,28 +6,29 @@
 <div class="container">
 	
 	<form action="" method="post">
+		{% csrf_token %}
 		<fieldset>
 	  		<legend>Novo Funcionario</legend>
-	
-	  		<div class="form-group">
-	    			<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
-	  		</div>
-	
-	  		<div class="form-group">
-	    			<input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">  
-	  		</div>
-	  		
-	  		<label>Data Admissão</label>
-		  		<div class="form-group">
-		    			<input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao">  
-		  		</div>
-			
-			<div class="form-group">	
-		  			<label>Cargo</label>
-				    <select name="codigoCargo">				    	
-						  <option>  </option>					
-					</select>
-				</div>
+			{{ form.as_p }}
+	  		<!--<div class="form-group">-->
+	    			<!--<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">-->
+	  		<!--</div>-->
+	<!---->
+	  		<!--<div class="form-group">-->
+	    			<!--<input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">  -->
+	  		<!--</div>-->
+	  		<!---->
+	  		<!--<label>Data Admissão</label>-->
+		  		<!--<div class="form-group">-->
+		    			<!--<input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao">  -->
+		  		<!--</div>-->
+			<!---->
+			<!--<div class="form-group">	-->
+		  			<!--<label>Cargo</label>-->
+				    <!--<select name="codigoCargo">				    	-->
+						  <!--<option>  </option>					-->
+					<!--</select>-->
+				<!--</div>-->
 	  
 	  		<button type="submit" class="btn btn-primary">
 	  				<span class="glyphicon glyphicon-thumbs-up"></span>
@@ -56,18 +57,20 @@
   						<th>CPF</th>
   						<th>Data Admissão</th>
   						<th>Cargo</th>
-  						<th></th>
+  						<th>Opções</th>
   				</tr>
+				{% for funcionario in funcionarios %}
   				<tr>
-    					<td class="col-md-1">01</td>
-    					<td class="col-md-3">Marcos Stark</td>
-    					<td class="col-md-1">111.222.333.-44</td>
-    					<td class="col-md-1">12/10/2018</td>
-    					<td class="col-md-1">Gerente</td>
+    					<td class="col-md-1">{{ funcionario.id }}</td>
+    					<td class="col-md-3">{{ funcionario.nome }}</td>
+    					<td class="col-md-1">{{ funcionario.cpf}}</td>
+    					<td class="col-md-2">{{ funcionario.data_admissao }}</td>
+    					<td class="col-md-1">{{ funcionario.cargo }}</td>
     					<td class="col-md-1">
-    						<a class="btn btn-danger" href="../controller/excluir_funcionario.php?codigo=<?= $objetoFuncionario->getCodigo(); ?>" role="button">Excluir</a>  								
+    						<a class="btn btn-danger" href="{% url 'url_removerfuncionario' funcionario.id%}" role="button">Excluir</a>
     					</td>
     			</tr>
+				{% endfor %}
     			
     			</table>
     			
