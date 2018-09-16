@@ -1,7 +1,8 @@
 from django import forms
-from .models import Cliente, Cargo, Funcionario
+from .models import Cliente, Cargo, Funcionario, Veiculo
 
 class ClienteForm(forms.ModelForm):
+
     nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     cpf = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     status = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -13,6 +14,7 @@ class ClienteForm(forms.ModelForm):
 
 
 class CargoForm(forms.ModelForm):
+
     nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     descricao = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     salario = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
@@ -21,7 +23,9 @@ class CargoForm(forms.ModelForm):
         model = Cargo
         fields = ('nome','descricao','salario')
 
+
 class FuncionarioForm(forms.ModelForm):
+
     nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     cpf = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     data_admissao = forms.DateField(widget=forms.DateTimeInput(attrs={'type':'date','class': 'form-control'}))
@@ -31,3 +35,17 @@ class FuncionarioForm(forms.ModelForm):
     class Meta:
         model = Funcionario
         fields = ('nome','cpf','data_admissao','cargo')
+
+
+class VeiculoForm(forms.ModelForm):
+
+    modelo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    cor = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    ano = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    placa = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    tipo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    status = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Veiculo
+        fields = ('modelo','cor','ano','placa','tipo','status')

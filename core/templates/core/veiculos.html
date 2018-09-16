@@ -7,46 +7,48 @@
 
 <div class="container">
 
-  <form action="../controller/incluir_veiculo.php" method="post">
+  <form action="{% url 'url_veiculo' %}" method="post">
+      {% csrf_token %}
     <fieldset>
         <legend>Novo Veículo</legend>
+        {{ form.as_p }}
 
-        <div class="form-group">
-            <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo">
-        </div>
+        <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo">-->
+        <!--</div>-->
 
-        <div class="form-group">
-            <input type="text" class="form-control" id="cor" name="cor" placeholder="Cor">
-        </div>
+        <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control" id="cor" name="cor" placeholder="Cor">-->
+        <!--</div>-->
 
-        <div class="form-group">
-            <input type="number" min="0" step="any" class="form-control" id="ano" name="ano" placeholder="Ano">
-        </div>
+        <!--<div class="form-group">-->
+            <!--<input type="number" min="0" step="any" class="form-control" id="ano" name="ano" placeholder="Ano">-->
+        <!--</div>-->
 
-        <div class="form-group">
-            <input type="text" class="form-control" id="placa" name="placa" placeholder="Placa">
-        </div>
+        <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control" id="placa" name="placa" placeholder="Placa">-->
+        <!--</div>-->
 
-        <div class="form-group">
-          <label>Modelo</label>
-          <select class="form-control" name="tipo">
-            <option value="Hach Médio">Hach Médio</option>
-            <option value="Hach Compacto">Hach Compacto</option>
-            <option value="Sedam">Sedam</option>
-            <option value="Suv">Suv</option>
-            <option value="Motocicleta">Motocicleta</option>
-        </select>
-      </div>
+        <!--<div class="form-group">-->
+          <!--<label>Modelo</label>-->
+          <!--<select class="form-control" name="tipo">-->
+            <!--<option value="Hach Médio">Hach Médio</option>-->
+            <!--<option value="Hach Compacto">Hach Compacto</option>-->
+            <!--<option value="Sedam">Sedam</option>-->
+            <!--<option value="Suv">Suv</option>-->
+            <!--<option value="Motocicleta">Motocicleta</option>-->
+        <!--</select>-->
+      <!--</div>-->
 
-        <div class="form-group">
-          <label>Status</label>
-          <select class="form-control" name="status">
-            <option value="Livre">Livre</option>
-            <option value="Alugado">Alugado</option>
-            <option value="Desativado">Desativado</option>
-            <option value="Manutenção">Manutenção</option>
-          </select>
-        </div>
+        <!--<div class="form-group">-->
+          <!--<label>Status</label>-->
+          <!--<select class="form-control" name="status">-->
+            <!--<option value="Livre">Livre</option>-->
+            <!--<option value="Alugado">Alugado</option>-->
+            <!--<option value="Desativado">Desativado</option>-->
+            <!--<option value="Manutenção">Manutenção</option>-->
+          <!--</select>-->
+        <!--</div>-->
 
         <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-thumbs-up"></span>
@@ -77,20 +79,22 @@
               <th>Placa</th>
               <th>Tipo</th>
               <th>Status</th>
-              <th></th>
+              <th>Opções</th>
           </tr>
+            {% for veiculo in veiculos %}
             <tr>
-              <td class="col-md-1"></td>
-              <td class="col-md-1"></td>
-              <td class="col-md-3"></td>
-              <td class="col-md-1"></td>
-              <td class="col-md-3"></td>
-              <td class="col-md-3"></td>
-              <td class="col-md-3"></td>
+              <td class="col-md-1">{{ veiculo.id }}</td>
+              <td class="col-md-1">{{ veiculo.modelo }}</td>
+              <td class="col-md-3">{{ veiculo.cor }}</td>
+              <td class="col-md-1">{{ veiculo.ano }}</td>
+              <td class="col-md-1">{{ veiculo.placa }}</td>
+              <td class="col-md-3">{{ veiculo.tipo }}</td>
+              <td class="col-md-3">{{ veiculo.status }}</td>
               <td class="col-md-1">
-                <a class="btn btn-danger" href="" role="button">Excluir</a>
+                <a class="btn btn-danger" href="{% url 'url_removerveiculo' veiculo.pk %}" role="button">Excluir</a>
               </td>
             </tr>
+            {% endfor %}
           </table>
 
     </div><!-- fim .panel-body -->

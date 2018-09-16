@@ -29,3 +29,14 @@ class Funcionario(models.Model):
     def __str__(self):
         return self.nome
 
+
+class Veiculo(models.Model):
+    modelo = models.CharField(max_length=200)
+    cor = models.CharField(max_length=15)
+    ano = models.IntegerField()
+    placa = models.CharField(max_length=15)
+    tipo = models.CharField(max_length=15)
+    status = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.modelo

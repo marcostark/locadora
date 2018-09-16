@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import index, funcionarios, cargos, clientes, locacoes, veiculos
-from core.views import remover_clientes, remover_cargos, remover_funcionarios
+from core.views import remover_clientes, remover_cargos, remover_funcionarios, remover_veiculos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,7 @@ urlpatterns = [
     path('remover_clientes/<int:pk>/', remover_clientes, name='url_removerclientes'),
     path('remover_cargos/<int:pk>/', remover_cargos, name='url_removercargos'),
     path('remover_funcionario/<int:pk>/', remover_funcionarios, name='url_removerfuncionario'),
+    path('remover_veiculo/<int:pk>/', remover_veiculos, name='url_removerveiculo'),
 
     path('', index, name='url_index'),
 ]

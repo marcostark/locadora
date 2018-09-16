@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ClienteForm, CargoForm, FuncionarioForm
-from .models import Cliente, Cargo, Funcionario
+from .forms import ClienteForm, CargoForm, FuncionarioForm, VeiculoForm
+from .models import Cliente, Cargo, Funcionario, Veiculo
 
 def index(request):
     return render(request, 'core/index.html')
@@ -32,7 +32,17 @@ def cargos(request):
     return render(request, 'core/cargos.html', data)
 
 def veiculos(request):
-    return render(request, 'core/veiculos.html')
+    data = {}
+    data['veiculos'] = Veiculo.objects.all()  # Carregando clientes do banco
+
+    if request.method == 'POST':
+        form = VeiculoForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva
+            return redirect('url_veiculo')
+    else:
+        data['form'] = VeiculoForm()
+    return render(request, 'core/veiculos.html', data)
 
 def clientes(request):
     data = {}
@@ -67,5 +77,10 @@ def remover_funcionarios(request, pk):
     funcionario = Funcionario.objects.get(pk=pk)
     funcionario.delete()
     return redirect('url_funcionario')
+
+def remover_veiculos(request, pk):
+    veiculo = Veiculo.objects.get(pk=pk)
+    veiculo.delete()
+    return redirect('url_veiculo')
 
 
