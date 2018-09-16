@@ -1,11 +1,11 @@
 from django import forms
-from .models import Cliente, Cargo, Funcionario, Veiculo
+from .models import Cliente, Cargo, Funcionario, Veiculo, Locacao
 
 class ClienteForm(forms.ModelForm):
 
     nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     cpf = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    status = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    status = forms.ChoiceField(choices = [('A', 'Ativo'),('I', 'Inativo'),], widget=forms.Select(attrs={'class': 'form-control'}))
     pontos_fidelidade = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
@@ -49,3 +49,24 @@ class VeiculoForm(forms.ModelForm):
     class Meta:
         model = Veiculo
         fields = ('modelo','cor','ano','placa','tipo','status')
+
+
+class LocacaoForm(forms.ModelForm):
+
+    data_locacao = forms.DateField(widget=forms.DateTimeInput(attrs={'type':'date','class': 'form-control'}))
+    data_devolucao = forms.DateField(widget=forms.DateTimeInput(attrs={'type': 'date', 'class': 'form-control'}))
+
+    #status = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    status = forms.ChoiceField(choices=[('A', 'Em Aberto'), ('F', 'Fechada'), ],
+                               widget=forms.Select(attrs={'class': 'form-control'}))
+
+    funcionario = forms.ModelChoiceField(queryset=Funcionario.objects.all(),
+                                         widget=forms.Select(attrs={'class': 'form-control'}))
+    cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(),
+                                         widget=forms.Select(attrs={'class': 'form-control'}))
+    veiculo = forms.ModelChoiceField(queryset=Veiculo.objects.all(),
+                                         widget=forms.Select(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Locacao
+        fields = ('data_locacao','data_devolucao','status','funcionario','cliente', 'veiculo')

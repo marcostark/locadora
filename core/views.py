@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import ClienteForm, CargoForm, FuncionarioForm, VeiculoForm
-from .models import Cliente, Cargo, Funcionario, Veiculo
+from .forms import ClienteForm, CargoForm, FuncionarioForm
+from .forms import VeiculoForm, LocacaoForm
+from .models import Cliente, Cargo, Funcionario, Veiculo, Locacao
 
 def index(request):
     return render(request, 'core/index.html')
@@ -59,7 +60,18 @@ def clientes(request):
     return render(request, 'core/clientes.html', data)
 
 def locacoes(request):
-    return render(request, 'core/locacoes.html')
+    data = {}
+    data['locacoes'] = Locacao.objects.all()  # Carregando clientes do banco
+
+    if request.method == 'POST':
+        form = LocacaoForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva
+            return redirect('url_locacao')
+    else:
+        data['form'] = LocacaoForm()
+        # form = ClienteForm()
+    return render(request, 'core/locacoes.html', data)
 
 # REMOÇÃO
 

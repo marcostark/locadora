@@ -66,7 +66,11 @@
 						<td class="col-md-1">{{ cliente.id}}</td>
 						<td class="col-md-2">{{ cliente.nome }}</td>
     					<td class="col-md-2">{{ cliente.cpf }}</td>
-    					<td class="col-md-1">{{ cliente.status }}</td>
+						{% if cliente.status == "I" %}
+    						<td class="col-md-1">Inativo</td>
+						{% else %}
+							<td class="col-md-1">Ativo</td>
+						{% endif %}
 						<td class="col-md-1">{{ cliente.pontos_fidelidade }}</td>
 
     					<td class="col-md-1">
