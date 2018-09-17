@@ -73,26 +73,107 @@ def locacoes(request):
         # form = ClienteForm()
     return render(request, 'core/locacoes.html', data)
 
-# REMOÇÃO
 
-def remover_clientes(request, pk):
+# ATUALIZA
+
+def atualiza_cliente(request, pk):
+    data = {}
+    cliente = Cliente.objects.get(pk=pk)
+    form = ClienteForm(request.POST or None, instance=cliente) #Passar o formulario preenchido
+
+    # Verificar se o form é valido
+    if form.is_valid():
+        form.save()  # Salva
+        return redirect('url_cliente')  # E redireciona para a listagem
+
+    data['form'] = form
+    data['clientes'] = cliente # Enviando a transação pela URL, para ser possivel remover
+
+    return render(request, 'core/atualizacliente.html', data)
+
+
+def atualiza_funcionario(request, pk):
+    data = {}
+    funcionario = Funcionario.objects.get(pk=pk)
+    form = FuncionarioForm(request.POST or None, instance=funcionario) #Passar o formulario preenchido
+
+    # Verificar se o form é valido
+    if form.is_valid():
+        form.save()  # Salva
+        return redirect('url_funcionario')  # E redireciona para a listagem
+
+    data['form'] = form
+
+    return render(request, 'core/atualizafuncionario.html', data)
+
+
+def atualiza_cargo(request, pk):
+    data = {}
+    cargo = Cargo.objects.get(pk=pk)
+    form = CargoForm(request.POST or None, instance=cargo)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_cargo')
+
+    data['form'] = form
+
+    return render(request, 'core/atualizacargo.html', data)
+
+
+def atualiza_veiculo(request, pk):
+    data = {}
+    veiculo = Veiculo.objects.get(pk=pk)
+    form = VeiculoForm(request.POST or None, instance=veiculo)
+
+    # Verificar se o form é valido
+    if form.is_valid():
+        form.save()  # Salva
+        return redirect('url_veiculo')  # E redireciona para a listagem
+
+    data['form'] = form
+
+    return render(request, 'core/atualizaveiculo.html', data)
+
+
+def atualiza_locacao(request, pk):
+    data = {}
+    locacao = Locacao.objects.get(pk=pk)
+    form = LocacaoForm(request.POST or None, instance=locacao)
+
+    if form.is_valid():
+        form.save()
+        return redirect('url_locacao')
+
+    data['form'] = form
+
+    return render(request, 'core/atualizalocacao.html', data)
+
+# REMOVER
+
+def remover_cliente(request, pk):
     cliente = Cliente.objects.get(pk=pk)
     cliente.delete()
     return redirect('url_cliente')
 
-def remover_cargos(request, pk):
+def remover_cargo(request, pk):
     cargo = Cargo.objects.get(pk=pk)
     cargo.delete()
     return redirect('url_cargo')
 
-def remover_funcionarios(request, pk):
+def remover_funcionario(request, pk):
     funcionario = Funcionario.objects.get(pk=pk)
     funcionario.delete()
     return redirect('url_funcionario')
 
-def remover_veiculos(request, pk):
+def remover_veiculo(request, pk):
     veiculo = Veiculo.objects.get(pk=pk)
     veiculo.delete()
     return redirect('url_veiculo')
+
+def remover_locacao(request, pk):
+    locacao = Locacao.objects.get(pk=pk)
+    locacao.delete()
+    return redirect('url_locacao')
 
 

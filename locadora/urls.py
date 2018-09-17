@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import index, funcionarios, cargos, clientes, locacoes, veiculos
-from core.views import remover_clientes, remover_cargos, remover_funcionarios, remover_veiculos
+from core.views import remover_cliente, remover_cargo, remover_funcionario, remover_veiculo, remover_locacao
+from core.views import atualiza_cliente, atualiza_funcionario, atualiza_cargo
+from core.views import  atualiza_veiculo, atualiza_locacao
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,10 +29,17 @@ urlpatterns = [
     path('locacoes/', locacoes, name='url_locacao'),
     path('veiculos/', veiculos, name='url_veiculo'),
 
-    path('remover_clientes/<int:pk>/', remover_clientes, name='url_removerclientes'),
-    path('remover_cargos/<int:pk>/', remover_cargos, name='url_removercargos'),
-    path('remover_funcionario/<int:pk>/', remover_funcionarios, name='url_removerfuncionario'),
-    path('remover_veiculo/<int:pk>/', remover_veiculos, name='url_removerveiculo'),
+    path('atualizacliente/<int:pk>/', atualiza_cliente, name='url_atualizacliente'),
+    path('atualizafuncionario/<int:pk>/', atualiza_funcionario, name='url_atualizafuncionario'),
+    path('atualizacargo/<int:pk>/', atualiza_cargo, name='url_atualizacargo'),
+    path('atualizaveiculo/<int:pk>/', atualiza_veiculo, name='url_atualizaveiculo'),
+    path('atualizalocacao/<int:pk>/', atualiza_locacao, name='url_atualizalocacao'),
+
+    path('remover_cliente/<int:pk>/', remover_cliente, name='url_removercliente'),
+    path('remover_cargo/<int:pk>/', remover_cargo, name='url_removercargo'),
+    path('remover_funcionario/<int:pk>/', remover_funcionario, name='url_removerfuncionario'),
+    path('remover_veiculo/<int:pk>/', remover_veiculo, name='url_removerveiculo'),
+    path('remover_locacao/<int:pk>/', remover_locacao, name='url_removerlocacao'),
 
     path('', index, name='url_index'),
 ]

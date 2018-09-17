@@ -10,25 +10,6 @@
 		<fieldset>
 	  		<legend>Novo Funcionario</legend>
 			{{ form.as_p }}
-	  		<!--<div class="form-group">-->
-	    			<!--<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">-->
-	  		<!--</div>-->
-	<!---->
-	  		<!--<div class="form-group">-->
-	    			<!--<input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF">  -->
-	  		<!--</div>-->
-	  		<!---->
-	  		<!--<label>Data Admissão</label>-->
-		  		<!--<div class="form-group">-->
-		    			<!--<input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao">  -->
-		  		<!--</div>-->
-			<!---->
-			<!--<div class="form-group">	-->
-		  			<!--<label>Cargo</label>-->
-				    <!--<select name="codigoCargo">				    	-->
-						  <!--<option>  </option>					-->
-					<!--</select>-->
-				<!--</div>-->
 	  
 	  		<button type="submit" class="btn btn-primary">
 	  				<span class="glyphicon glyphicon-thumbs-up"></span>
@@ -66,7 +47,9 @@
     					<td class="col-md-1">{{ funcionario.cpf}}</td>
     					<td class="col-md-2">{{ funcionario.data_admissao }}</td>
     					<td class="col-md-1">{{ funcionario.cargo }}</td>
-    					<td class="col-md-1">
+
+    					<td class="col-md-2">
+							<a class="btn btn-warning" href="{% url 'url_atualizafuncionario' funcionario.id%}" role="button">Editar</a>
     						<a class="btn btn-danger" href="{% url 'url_removerfuncionario' funcionario.id%}" role="button">Excluir</a>
     					</td>
     			</tr>

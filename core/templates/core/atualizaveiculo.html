@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+
+  <form method="post">
+      {% csrf_token %}
+    <fieldset>
+        <legend>Atualizar Veículo</legend>
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+            Atualizar
+      </button>
+    </fieldset>
+  </form>
+</div> <!-- fim .container 1 -->
+
+<div class="container">
+  <br /> <br />
+</div> <!-- fim .container 2 -->
+</div><!-- fim .panel-body -->
+</div><!-- fim .panel -->
+
+{% endblock %}

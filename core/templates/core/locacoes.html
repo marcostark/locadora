@@ -12,50 +12,6 @@
 		<fieldset>
 	  		<legend>Nova Locação</legend>
 			{{ form.as_p }}
-	  		<!--<label>Data Locação</label>-->
-		  		<!--<div class="form-group">-->
-		    			<!--<input type="date" class="form-control" id="dataLocacao" name="dataLocacao">-->
-		  		<!--</div>-->
-
-      <!--<label>Data Devolução</label>-->
-          <!--<div class="form-group">-->
-              <!--<input type="date" class="form-control" id="dataDevolucao" name="dataDevolucao">-->
-          <!--</div>-->
-
-        <!--<div class="form-group">-->
-          <!--<label>Status</label>-->
-          <!--<select class="form-control" name="status">-->
-            <!--<option value="Aberta">Aberta</option>-->
-            <!--<option value="Fechada">Fechada</option>-->
-            <!--<option value="Cancelada">Cancelada</option>-->
-        <!--</select>-->
-
-
-      <!--<div class="form-group">-->
-		  			<!--<label>Funcionário</label>-->
-				    <!--<select class="form-control" name="codigoFuncionario">-->
-
-						  <!--<option  value="<?php echo $objetoFuncionario->getCodigo(); ?>"> </option>-->
-
-					<!--</select>-->
-				<!--</div>-->
-
-
-      	<!--<div class="form-group">-->
-            <!--<label>Cliente</label>-->
-            <!--<select class="form-control" name="codigoCliente">-->
-				<!--<option value=""> </option>-->
-
-          <!--</select>-->
-        <!--</div>-->
-
-
-      	<!--<div class="form-group">-->
-            <!--<label>Veículo</label>-->
-            <!--<select class="form-control" name="codigoVeiculo">-->
-                    <!--<option value="<"></option>-->
-          	<!--</select>-->
-        <!--</div>-->
 		<fieldset>
 	  		<button type="submit" class="btn btn-primary">
 	  				<span class="glyphicon glyphicon-thumbs-up"></span>
@@ -86,23 +42,20 @@
   						<th>Funcionário</th>
               			<th>Cliente</th>
               			<th>Veículo</th>
-  						<th></th>
+  						<th>Opções</th>
   					</tr>
 				{% for locacao in locacoes %}
 					<tr>
     					<td class="col-md-1">{{ locacao.id }}</td>
     					<td class="col-md-1">{{ locacao.data_locacao }}</td>
               			<td class="col-md-1">{{ locacao.data_devolucao }}</td>
-    					{% if locacao.status == "A" %}
-    						<td class="col-md-1">Em aberto</td>
-						{% else %}
-							<td class="col-md-1">Fechada</td>
-						{% endif %}
+    					<td class="col-md-1">{{ locacao.status }}</td>
 					  	<td class="col-md-1">{{ locacao.funcionario }}</td>
 					  	<td class="col-md-1">{{ locacao.cliente }}</td>
-					  	<td class="col-md-1">{{ locacao.veiculo }}</td>
-    					<td class="col-md-1">
-    						<a class="btn btn-danger" href="" role="button">Excluir</a>
+						<td class="col-md-1">{{ locacao.veiculo }}</td>
+    					<td class="col-md-2">
+                            <a class="btn btn-warning" href="{% url 'url_atualizalocacao' locacao.id %}" role="button">Editar</a>
+    						<a class="btn btn-danger" href="{% url 'url_removerlocacao' locacao.id %}" role="button">Excluir</a>
     					</td>
     				</tr>
 				{% endfor %}

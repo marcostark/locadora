@@ -45,8 +45,10 @@
     					<td class="col-md-1">{{ cargo.nome }}</td>
     					<td class="col-md-3">{{ cargo.descricao }}</td>
     					<td class="col-md-1">{{ cargo.salario }}</td>
-    					<td class="col-md-1">
-    					<a class="btn btn-danger" href="{% url 'url_removercargos' cargo.id %}" role="button">Excluir</a>
+
+    					<td class="col-md-2">
+							<a class="btn btn-warning" href="{% url 'url_atualizacargo' cargo.id %}" role="button">Editar</a>
+    						<a class="btn btn-danger" href="{% url 'url_removercargo' cargo.id %}" role="button">Excluir</a>
     					</td>
     				</tr>
 					{% endfor %}

@@ -5,7 +5,7 @@ class ClienteForm(forms.ModelForm):
 
     nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     cpf = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    status = forms.ChoiceField(choices = [('A', 'Ativo'),('I', 'Inativo'),], widget=forms.Select(attrs={'class': 'form-control'}))
+    status = forms.ChoiceField(choices = Cliente.STATUS, widget=forms.Select(attrs={'class': 'form-control'}))
     pontos_fidelidade = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
@@ -43,8 +43,10 @@ class VeiculoForm(forms.ModelForm):
     cor = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     ano = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     placa = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    tipo = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    status = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    tipo = forms.ChoiceField(choices=Veiculo.TIPO,
+                             widget=forms.Select(attrs={'class': 'form-control'}))
+    status = forms.ChoiceField(choices=Veiculo.STATUS_VEICULO,
+        widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Veiculo
@@ -57,14 +59,16 @@ class LocacaoForm(forms.ModelForm):
     data_devolucao = forms.DateField(widget=forms.DateTimeInput(attrs={'type': 'date', 'class': 'form-control'}))
 
     #status = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    status = forms.ChoiceField(choices=[('A', 'Em Aberto'), ('F', 'Fechada'), ],
+    status = forms.ChoiceField(choices= Locacao.DEVOLUCAO_STATUS,
                                widget=forms.Select(attrs={'class': 'form-control'}))
 
     funcionario = forms.ModelChoiceField(queryset=Funcionario.objects.all(),
                                          widget=forms.Select(attrs={'class': 'form-control'}))
-    cliente = forms.ModelChoiceField(queryset=Cliente.objects.all(),
+
+    cliente = forms.ModelChoiceField(queryset=Cliente.objects.filter(status='ATIVO'),
                                          widget=forms.Select(attrs={'class': 'form-control'}))
-    veiculo = forms.ModelChoiceField(queryset=Veiculo.objects.all(),
+
+    veiculo = forms.ModelChoiceField(queryset=Veiculo.objects.filter(status='DISPONÍVEL'),
                                          widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
